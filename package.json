@@ -1,0 +1,60 @@
+{
+    "name": "i18minimal",
+    "version": "1.0.0",
+    "description": "a lightweight, type-safe internationalization helper for JavaScript and TypeScript applications",
+    "main": "dist/index.js",
+    "scripts": {
+        "build": "tsup src/index.ts --format esm,cjs --clean --dts --out-dir dist",
+        "format": "prettier --write 'src/**/*.{ts,tsx}'",
+        "test": "vitest run",
+        "test-format-build-publish": "pnpm test && pnpm format && pnpm build && npm publish --access public --registry=https://registry.npmjs.org"
+    },
+    "keywords": [
+        "i18n",
+        "internationalization",
+        "localization",
+        "translation",
+        "typescript",
+        "type-safe",
+        "lightweight",
+        "zero-dependency",
+        "minimal"
+    ],
+    "author": "NMNM.CC",
+    "license": "ISC",
+    "packageManager": "pnpm@10.13.1",
+    "type": "module",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/NMNMCC/i18m.git"
+    },
+    "homepage": "https://github.com/NMNMCC/i18m#readme",
+    "bugs": {
+        "url": "https://github.com/NMNMCC/i18m/issues"
+    },
+    "exports": {
+        ".": {
+            "import": {
+                "types": "./dist/index.d.ts",
+                "default": "./dist/index.js"
+            },
+            "require": {
+                "types": "./dist/index.d.ts",
+                "default": "./dist/index.cjs"
+            }
+        }
+    },
+    "files": [
+        "dist",
+        "src",
+        "README.md",
+        "LICENSE"
+    ],
+    "devDependencies": {
+        "@types/node": "^24.0.14",
+        "prettier": "^3.6.2",
+        "tsup": "^8.5.0",
+        "vitest": "^3.2.4",
+        "typescript": "^5.8.3"
+    }
+}
