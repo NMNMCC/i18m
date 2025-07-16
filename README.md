@@ -40,7 +40,7 @@ yarn add i18minimal
 Compose a nested object where each key maps to either a string or a function. Functions can accept arguments (for interpolation or dynamic content) and must return a string.
 
 ```ts
-import { make } from "i18minimal";
+import make from "i18minimal";
 
 const locales = {
     en: {
@@ -71,10 +71,7 @@ Invoke `make` by supplying:
     - `sources`: an array of language tags to match (default: `navigator.languages`).
 
 ```ts
-const i18n = make("en", locales, {
-    splitter: "->",
-    sources: ["zh-CN", "en-US"],
-});
+const i18n = make("en", locales);
 ```
 
 ### 3. Retrieve Translations

@@ -1,6 +1,6 @@
 {
     "name": "i18minimal",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "a lightweight, type-safe internationalization helper for JavaScript and TypeScript applications",
     "main": "dist/index.js",
     "scripts": {
