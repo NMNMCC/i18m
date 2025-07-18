@@ -1,8 +1,3 @@
-export type Leaf = string | ((...args: any[]) => string);
-export type Locale = {
-    [key: string]: Leaf | Locale;
-};
-
 type Path<T, S extends string> = T extends object
     ? {
           [K in keyof T]: `${Exclude<K, symbol>}${Path<T[K], S> extends never ? "" : `${S}${Path<T[K], S>}`}`;
@@ -42,8 +37,8 @@ const matchMany = <T extends string[]>(
         : match(head, targets) || matchMany(tail, targets);
 
 export default <
-    T extends Record<string, T[K]>,
-    K extends keyof T extends string ? keyof T : never,
+    T extends { [K in string]: T[K] },
+    K extends keyof T,
     S extends string = "->",
 >(
     main: K,
@@ -56,12 +51,10 @@ export default <
         sources: readonly string[];
     }> = {},
 ) => {
-    type ID = keyof T extends string ? keyof T : never;
+    const locales = Object.keys(locale);
+    let matched = (matchMany(sources, locales) || main) as keyof T;
 
-    const locales = Object.keys(locale) as ID[];
-    let matched: ID = matchMany(sources, locales) || (main as ID);
-
-    const set = (id: ID) => {
+    const set = (id: keyof T) => {
         matched = id;
     };
 
@@ -71,18 +64,18 @@ export default <
     ): FromPath<T[K], P, S> => {
         const leaves = key.split(splitter) as string[];
 
-        return leaves.reduce<Leaf | Locale>((acc, curr) => {
+        return leaves.reduce((acc, curr) => {
             if (acc && typeof acc === "object" && curr in acc) {
                 return (acc as Record<string, any>)[curr];
             } else {
                 if (id !== main) {
                     console.warn(
-                        `'${key}' can not be found in locale '${id}', falling back to main '${main}'.`,
+                        `'${key}' can not be found in locale '${id.toString()}', falling back to main '${main.toString()}'.`,
                     );
                     return get(key, main);
                 } else {
                     throw new Error(
-                        `'${key}' can not be found in locale '${id}' and no fallback is available.`,
+                        `'${key}' can not be found in locale '${id.toString()}' and no fallback is available.`,
                     );
                 }
             }
