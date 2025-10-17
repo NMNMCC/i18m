@@ -1,6 +1,6 @@
 {
     "name": "i18minimal",
-    "version": "1.0.2",
+    "version": "2.0.0",
     "description": "a lightweight, type-safe internationalization helper for JavaScript and TypeScript applications",
     "main": "dist/index.js",
     "scripts": {
@@ -51,10 +51,10 @@
         "LICENSE"
     ],
     "devDependencies": {
-        "@types/node": "^24.0.14",
+        "@types/node": "^24.8.1",
         "prettier": "^3.6.2",
         "tsup": "^8.5.0",
-        "vitest": "^3.2.4",
-        "typescript": "^5.8.3"
+        "typescript": "^5.9.3",
+        "vitest": "^3.2.4"
     }
 }
